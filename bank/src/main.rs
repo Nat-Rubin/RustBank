@@ -20,7 +20,7 @@ fn main() -> Result<(), Box<dyn Error>>{
         let _=stdout().flush();
         stdin().read_line(&mut user_input).unwrap();
         user_input = user_input.to_lowercase();
-        user_input.truncate(user_input.len()-1);
+        user_input.truncate(user_input.len()-2);
         
         println!("{user_input}");
         match user_input.as_str() {
