@@ -29,5 +29,4 @@ fn main() -> Result<(), Box<dyn Error>>{
             _ => println!("Please input a valid option"),
         }
     }
-    
 }

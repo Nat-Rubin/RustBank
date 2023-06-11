@@ -12,8 +12,9 @@ fn connect() {
 }
 
 async fn create_tables() -> Result<(), Box<dyn Error>>{
+
+    let url = "postgres://postgres:password@192.168.1.223:5432/postgres";
     println!("Here in create_tables1");
-    let url = "postgres://postgres:password@localhost:5432/postgres";
     let pool = PgPoolOptions::new()
     .connect(url)
     .await?;
@@ -84,7 +85,7 @@ pub async fn add(user: User) -> Result<(), Box<dyn Error>>{
     Ok(())
 }
 
-/*pub async fn get_last_id() -> Result<i32, Box<dyn Error>> {
+pub async fn get_last_id() -> Result<i32, Box<dyn Error>> {
 
     let url = "postgres://postgres:password@localhost:5432/postgres";
     let pool = PgPoolOptions::new()
@@ -106,4 +107,4 @@ pub async fn add(user: User) -> Result<(), Box<dyn Error>>{
     let id: i32 = query.fetch_one(&pool).await?;
 
     Ok(id)
-}*/
+}
