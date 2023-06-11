@@ -13,6 +13,7 @@ fn connect() {
 }
 
 async fn create_tables() -> Result<(), Box<dyn Error>>{
+    println!("Here in create_tables1");
     let url = "postgres://postgres:password@localhost:5432/postgres";
     let pool = PgPoolOptions::new()
     .connect(url)
@@ -55,7 +56,7 @@ pub async fn db_init() -> Result<(), Box<dyn Error>>{
 
 pub async fn add(user: User) -> Result<(), Box<dyn Error>>{
     println!("Here in user_dao::add()");
-    let url = "postgres://postgres:password@localhost:5432/postgres";
+    let url = "postgres://postgres:password@192.168.1.223:5432/postgres";
     let pool = PgPoolOptions::new()
     .connect(url)
     .await?;
@@ -83,3 +84,27 @@ pub async fn add(user: User) -> Result<(), Box<dyn Error>>{
     println!("User added to hashmap globals::users");
     Ok(())
 }
+
+/*pub async fn get_last_id() -> Result<i32, Box<dyn Error>> {
+
+    let url = "postgres://postgres:password@localhost:5432/postgres";
+    let pool = PgPoolOptions::new()
+    .connect(url)
+    .await?;
+
+    // check if table is empty
+    let q = "SELECT COUNT(*) FROM bank.users";
+    let query_row_count: i32 = sqlx::query_scalar(q).fetch_one(&pool).await?;
+
+    if query_row_count == 0 {
+        return Ok(0)
+    }
+
+    //let q = "SELECT * ROW_NUMBER() OVER (ORDER BY ID) AS ID FROM bank.users";
+    let q = "SELECT MAX(ID) FROM bank.users";
+    let query = sqlx::query_scalar(q);
+
+    let id: i32 = query.fetch_one(&pool).await?;
+
+    Ok(id)
+}*/

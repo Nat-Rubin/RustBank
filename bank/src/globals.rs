@@ -5,11 +5,13 @@ use crate::user::User;
 //use once_cell::sync::OnceCell;
 use sqlx::{Pool, Postgres, postgres::PgPoolOptions};
 use std::error::Error;
+use std::sync::atomic::AtomicUsize;
+
 
 //static MYSQL_DB: OnceCell<Pool<Postgres>> = OnceCell::new();
 pub struct DaoInfo {
     //pool: sqlx::Pool<Postgres>,
-    users: HashMap<i32, User>,
+    pub users: HashMap<i32, User>,
 }
 
 impl DaoInfo {
@@ -24,6 +26,9 @@ impl DaoInfo {
     pub fn add_user(&mut self, user: User) {
         self.users.insert(user.id, user);
     }
+    pub fn get_len(self) -> usize {
+        self.users.keys().len()
+    }
 }
 
 lazy_static! {
@@ -32,9 +37,4 @@ lazy_static! {
             //pool: PgPoolOptions::new().connect("postgres://postgres:password@localhost:5432/postgres").await?,
             users: HashMap::new()
         });
-    //pub static ref 
 }
-
-/*pub fn get_DAO_INFO() -> DAO_INFO {
-    return DAO_INFO
-}*/

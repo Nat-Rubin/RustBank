@@ -5,6 +5,7 @@ use futures::executor::block_on;
 use tokio::runtime::Runtime;
 
 use crate::user_dao;
+use crate::globals::DAO_INFO;
 
 //#[derive(Serialize, Deserialize)]
 #[derive(Clone)]
@@ -174,5 +175,8 @@ fn build_new_user(
 }
 
 fn get_new_id() -> i32 {
-    return 1;
+    // unique id based on len of hashmap (# keys)
+    let rt = Runtime::new().unwrap();
+    //rt.block_on(user_dao::get_last_id()).unwrap()
+    0
 }
