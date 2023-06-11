@@ -7,7 +7,6 @@ use sqlx::Postgres;
 use crate::user::User;
 use crate::globals::DAO_INFO;
 
-
 fn connect() {
     
 }
